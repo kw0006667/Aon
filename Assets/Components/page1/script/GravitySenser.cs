@@ -12,16 +12,26 @@ public class GravitySenser : MonoBehaviour
     void Start()
     {
         Input.gyro.enabled = true;
+        foreach (var obj in this.Objects)
+        {
+            obj.rigidbody.mass /= 100;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Physics.gravity = Input.acceleration * 10;
+        Physics.gravity = Input.acceleration * 10.0f;
         var pos = this.transform.position;
         this.g = Physics.gravity;
         //pos.y = Vector3.Dot(this.g, Vector3.down) * this.MovementScale;
         //this.transform.position = pos;
+
+        foreach (var item in this.Objects)
+        {
+            Vector3 vec3 = new Vector3(float.Parse(Input.gyro.userAcceleration.x.ToString("0")), float.Parse(Input.gyro.userAcceleration.y.ToString("0")), float.Parse(Input.gyro.userAcceleration.z.ToString("0")));
+            item.rigidbody.AddForce(vec3 * 10.0f, ForceMode.Impulse);
+        }
         print(g.x + ", " + g.y + ", " + g.z);
     }
 
