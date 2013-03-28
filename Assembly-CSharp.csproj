@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Components\CommonScript\ReplacePage.cs" />
+     <Compile Include="Assets\Components\page1\script\GravitySenser.cs" />
      <Compile Include="Assets\Components\page2\script\MissionCompleted.cs" />
      <Compile Include="Assets\Components\page2\script\ObjectRotate.cs" />
      <Compile Include="Assets\Components\page3\script\ObjectTrigger.cs" />

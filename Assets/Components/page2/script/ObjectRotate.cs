@@ -4,6 +4,7 @@ using System.Collections;
 public class ObjectRotate : MonoBehaviour
 {
     public GameObject CentralObject;
+    public float Speed;
 
     private Vector3 vec3;
 
@@ -18,10 +19,8 @@ public class ObjectRotate : MonoBehaviour
     {
         if (this.CentralObject != null)
         {
-            
             this.vec3 = this.CentralObject.transform.position;
-            this.transform.RotateAround(this.vec3, new Vector3(0.0f, 0.0f, this.vec3.z), Input.GetTouch(0).deltaPosition.x * (-0.1f));
-            
+            this.transform.RotateAround(this.vec3, new Vector3(0.0f, 0.0f, this.vec3.z), Input.GetTouch(0).deltaPosition.x * -this.Speed);
         }
         print("Input.touchCount = " + Input.touchCount + " .");
     }
