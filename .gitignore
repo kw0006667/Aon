@@ -1,0 +1,8 @@
+#Unity
+Library
+Temp
+*.unityproj
+*.pidb
+*.userprefs
+*.suo
+obj
