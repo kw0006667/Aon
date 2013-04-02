@@ -1,6 +1,8 @@
 #Unity
 Library
 Temp
+*.csproj
+*.sln
 *.unityproj
 *.pidb
 *.userprefs

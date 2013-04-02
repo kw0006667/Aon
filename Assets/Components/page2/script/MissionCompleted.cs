@@ -25,7 +25,7 @@ public class MissionCompleted : MonoBehaviour
         {
             if (this.hit.collider.Equals(this.TargetObject.collider) && this.touchInArea(this.hit))
             {
-                Application.LoadLevel(1);
+                Application.LoadLevel(2);
             }
         }
     }

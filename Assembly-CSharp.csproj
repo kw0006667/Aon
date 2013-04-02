@@ -46,9 +46,13 @@
   <ItemGroup>
      <Compile Include="Assets\Components\CommonScript\ReplacePage.cs" />
      <Compile Include="Assets\Components\page1\script\GravitySenser.cs" />
+     <Compile Include="Assets\Components\page1\script\MissionComplete_page1.cs" />
      <Compile Include="Assets\Components\page2\script\MissionCompleted.cs" />
      <Compile Include="Assets\Components\page2\script\ObjectRotate.cs" />
-     <Compile Include="Assets\Components\page3\script\ObjectTrigger.cs" />
+     <Compile Include="Assets\Components\page4\script\MissionComplete_Page4.cs" />
+     <Compile Include="Assets\Components\page4\script\TouchMoved.cs" />
+     <Compile Include="Assets\Components\page5\script\MissionComplete_Page5.cs" />
+     <Compile Include="Assets\Components\page5\script\TouchHeart.cs" />
      <Compile Include="Assets\FingerGestures\Samples\Scripts\AdvancedPinchRotationSample.cs" />
      <Compile Include="Assets\FingerGestures\Samples\Scripts\FingerEventsSamplePart1.cs" />
      <Compile Include="Assets\FingerGestures\Samples\Scripts\FingerEventsSamplePart2.cs" />
