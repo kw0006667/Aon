@@ -27,7 +27,7 @@ public class MissionComplete_Page4 : MonoBehaviour
             {
                 this.colliderCurrent = this.hit.collider.name;
                 if (this.hit.collider.Equals(this.TargetObject.collider))
-                    Application.LoadLevel(3);
+                    Application.LoadLevel("page5");
             }
         }
     }

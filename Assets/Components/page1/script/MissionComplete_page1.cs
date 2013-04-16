@@ -22,7 +22,7 @@ public class MissionComplete_page1 : MonoBehaviour
         {
             if (this.hit.collider.Equals(this.TargetObject.collider))
             {
-                Application.LoadLevel(1);
+                Application.LoadLevel("page2");
             }
         }
     }

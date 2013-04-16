@@ -23,14 +23,14 @@ public class MissionComplete_Page5 : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
             this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
-            if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Began))
+            //if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Began))
+            //{
+            //    this.col = this.hit.collider;
+            //}
+            if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Ended))
             {
-                this.col = this.hit.collider;
-            }
-            else if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Ended))
-            {
-                if (this.hit.collider.Equals(this.col))
-                    Application.LoadLevel(4);
+                if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
+                    Application.LoadLevel("page9");
             }
         }
         else
