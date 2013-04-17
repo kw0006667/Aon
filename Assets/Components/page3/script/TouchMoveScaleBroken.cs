@@ -4,6 +4,7 @@ using System.Collections;
 public class TouchMoveScaleBroken : MonoBehaviour
 {
     public GameObject Brokens;
+    public GameObject Aon;
     public Vector3 AonLimitPosition;
     public LayerMask Mask;
 
@@ -32,6 +33,14 @@ public class TouchMoveScaleBroken : MonoBehaviour
         }
         this.currentTouchesCollider = null;
         this.scaleValue = 0.8f;
+
+        if (this.Brokens != null && this.Aon != null)
+        {
+            Color color = this.Brokens.renderer.material.GetColor("_Color");
+            this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, 0));
+            color = this.Aon.renderer.material.GetColor("_Color");
+            this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, 0));
+        }
     }
 
     // Update is called once per frame
@@ -64,9 +73,10 @@ public class TouchMoveScaleBroken : MonoBehaviour
                         this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
                     }
 
-                    if (this.Brokens != null)
+                    if (this.Brokens != null && this.Aon != null)
                     {
                         this.offestAonValue = this.originalPosition.y - pos.y;
+                        float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
                         //float addValue = 0;
                         //if (offest > 0)
                         //    addValue = 0.01f;
@@ -75,7 +85,11 @@ public class TouchMoveScaleBroken : MonoBehaviour
 
                         //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
 
-                        this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                        //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                        Color color = this.Brokens.renderer.material.GetColor("_Color");
+                        this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                        color = this.Aon.renderer.material.GetColor("_Color");
+                        this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
                     }
                 }
                 else
@@ -91,9 +105,10 @@ public class TouchMoveScaleBroken : MonoBehaviour
                         this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
                     }
 
-                    if (this.Brokens != null)
+                    if (this.Brokens != null && this.Aon != null)
                     {
                         this.offestAonValue = this.originalPosition.y - pos.y;
+                        float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
                         //float addValue = 0;
                         //if (offest > 0)
                         //    addValue = 0.01f;
@@ -101,7 +116,11 @@ public class TouchMoveScaleBroken : MonoBehaviour
                         //    addValue = -0.01f;
 
                         //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
-                        this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                        //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                        Color color = this.Brokens.renderer.material.GetColor("_Color");
+                        this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                        color = this.Aon.renderer.material.GetColor("_Color");
+                        this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
                     }
 
                 }
@@ -114,6 +133,7 @@ public class TouchMoveScaleBroken : MonoBehaviour
         else
         {
             Debug.Log("Current device is not mobile. (Windows 8 RT, Android or iOS)");
+            Debug.Log(this.Brokens.renderer.material.GetColor("_Color"));
         }
     }
 
