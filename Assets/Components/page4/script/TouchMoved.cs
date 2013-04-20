@@ -52,13 +52,25 @@ public class TouchMoved : MonoBehaviour
                         this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
                     }
                 }
-                
+
             }
             else if (Input.touches[0].phase == TouchPhase.Ended)
             {
                 //this.currentTouchesCollider.gameObject.transform.position = new Vector3(Input.touches[0].position.x, this.currentTouchesCollider.gameObject.transform.position.y, this.currentTouchesCollider.gameObject.transform.position.z);
+                //if (this.currentTouchesCollider.Equals(this.collider))
+                //{
+                //    if (Input.touches[0].deltaPosition.x > 0)
+                //    {
+                //        this.rigidbody.AddForce(this.transform.TransformDirection(Vector3.right) * 300);
+                //    }
+                //    if (Input.touches[0].deltaPosition.x < 0)
+                //    {
+                //        this.rigidbody.AddForce(this.transform.TransformDirection(Vector3.left) * 300);
+                //    }
+                //}
+                    
                 this.currentTouchesCollider = null;
-                
+
             }
         }
         else
@@ -69,6 +81,6 @@ public class TouchMoved : MonoBehaviour
 
     void OnGUI()
     {
-        
+
     }
 }

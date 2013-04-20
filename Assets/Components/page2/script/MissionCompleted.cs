@@ -32,8 +32,8 @@ public class MissionCompleted : MonoBehaviour
 
     void OnGUI()
     {
-        string str = string.Format("Input.GetTouche(0).position = ({0}, {1}).", this.ray.GetPoint(100).x, this.ray.GetPoint(100).y);
-        GUI.Label(new Rect(50, 50, 200, 100), str);
+        //string str = string.Format("Input.GetTouche(0).position = ({0}, {1}).", this.ray.GetPoint(100).x, this.ray.GetPoint(100).y);
+        //GUI.Label(new Rect(50, 50, 200, 100), str);
     }
 
     private bool touchInArea(RaycastHit hit)

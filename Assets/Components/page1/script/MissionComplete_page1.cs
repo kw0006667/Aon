@@ -17,13 +17,20 @@ public class MissionComplete_page1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask))
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
-            if (this.hit.collider.Equals(this.TargetObject.collider))
+            this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask))
             {
-                Application.LoadLevel("page2");
+                if (this.hit.collider.Equals(this.TargetObject.collider))
+                {
+                    Application.LoadLevel("page2");
+                }
             }
+        }
+        else
+        {
+            Debug.Log("Current device is not mobile. (Windows 8 RT, Android or iOS)");
         }
     }
 }
