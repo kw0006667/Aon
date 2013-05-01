@@ -37,6 +37,9 @@ public class MissionComplete_page3 : MonoBehaviour
 
     void OnGUI()
     {
-        //GUI.Label(new Rect(Screen.currentResolution.width / 2 - 100, Screen.currentResolution.height / 2 - 50, 200, 100), this.TaretObject.renderer.material.GetColor("_Color").a.ToString());
+        if (Debug.isDebugBuild)
+        {
+            GUI.Label(new Rect(Screen.currentResolution.width / 2 - 100, Screen.currentResolution.height / 2 - 50, 200, 100), this.TaretObject.renderer.material.GetColor("_Color").a.ToString());
+        }
     }
 }

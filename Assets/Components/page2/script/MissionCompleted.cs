@@ -7,15 +7,12 @@ public class MissionCompleted : MonoBehaviour
     public Rect[] TargetArea;
     public LayerMask Mask;
 
-    private Collider touchCollider;
-
     private RaycastHit hit;
     private Ray ray;
 
     // Use this for initialization
     void Start()
     {
-        this.touchCollider = null;
 
     }
 
@@ -25,22 +22,12 @@ public class MissionCompleted : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
             this.ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Began)
-            {
-                this.touchCollider = null;
-                if (this.hit.collider.Equals(this.TargetObject))
-                {
-                    this.touchCollider = this.hit.collider;
-                }
-            }
             if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Ended)
             {
-                if (this.touchCollider)
+
+                if (this.hit.collider.Equals(this.TargetObject.collider) && this.touchInArea(this.hit))
                 {
-                    if (this.hit.collider.Equals(this.TargetObject.collider) && this.touchInArea(this.hit))
-                    {
-                        Application.LoadLevel("page3");
-                    }
+                    Application.LoadLevel("page3");
                 }
             }
         }
@@ -48,13 +35,16 @@ public class MissionCompleted : MonoBehaviour
         {
             Debug.Log("Current device is not mobile. (Windows 8 RT, Android or iOS)");
         }
-
     }
 
     void OnGUI()
     {
-        //string str = string.Format("Input.GetTouche(0).position = ({0}, {1}).", this.ray.GetPoint(100).x, this.ray.GetPoint(100).y);
-        //GUI.Label(new Rect(50, 50, 200, 100), str);
+        if (Debug.isDebugBuild)
+        {
+            string str = string.Format("Input.GetTouche(0).position = ({0}, {1}).", this.ray.GetPoint(100).x, this.ray.GetPoint(100).y);
+            GUI.Label(new Rect(50, 50, 200, 100), str);
+        }
+
     }
 
     private bool touchInArea(RaycastHit hit)

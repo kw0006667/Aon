@@ -48,28 +48,26 @@ public class PageTurn : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
             this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
-            if (Physics.Raycast(this.ray, out this.hit, 100, this.mask) && Input.touches[0].phase == TouchPhase.Began)
+            if (Physics.Raycast(this.ray, out this.hit, 100, this.mask) && Input.touches[0].phase == TouchPhase.Ended)
             {
-                this.touchCollider = null;
                 if (this.hit.collider.Equals(this.collider))
                 {
-                    this.touchCollider = this.hit.collider;
-                }
-            }
-            else if (Physics.Raycast(this.ray, out this.hit, 100, this.mask) && Input.touches[0].phase == TouchPhase.Ended)
-            {
-                if (this.touchCollider)
-                {
-                    if (this.touchCollider.Equals(this.collider))
-                    {
-                        Application.LoadLevel((int)this.TurnToPage);
-                    }
+                    Application.LoadLevel((int)this.TurnToPage);
                 }
             }
         }
         else
         {
             Debug.Log("Current device is not mobile. (Windows 8 RT, Android or iOS)");
+        }
+    }
+
+    void OnGUI()
+    {
+        if (Debug.isDebugBuild)
+        {
+            GUI.Label(new Rect(Screen.currentResolution.width / 2 - 200, Screen.currentResolution.height / 2 - 50, 200, 50), "Current touchCollider = " + this.hit.collider.name + "\n this.collder =" + this.collider.name);
+            Debug.Log("Current touchCollider = " + this.hit.collider.name);
         }
     }
 }

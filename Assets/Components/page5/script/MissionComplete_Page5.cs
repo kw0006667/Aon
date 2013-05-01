@@ -32,7 +32,7 @@ public class MissionComplete_Page5 : MonoBehaviour
                 if (this.TargetObject)
                 {
                     if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
-                        Application.LoadLevel("page9");
+                        Application.LoadLevel("page7");
                 }
 
             }
