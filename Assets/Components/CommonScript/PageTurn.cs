@@ -37,7 +37,7 @@ public class PageTurn : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
         this.touchCollider = null;
         //this.mask = 0 + 1 + 2 + 4;
     }
@@ -50,6 +50,7 @@ public class PageTurn : MonoBehaviour
             this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             if (Physics.Raycast(this.ray, out this.hit, 100, this.mask) && Input.touches[0].phase == TouchPhase.Began)
             {
+                this.touchCollider = null;
                 if (this.hit.collider.Equals(this.collider))
                 {
                     this.touchCollider = this.hit.collider;
@@ -57,9 +58,12 @@ public class PageTurn : MonoBehaviour
             }
             else if (Physics.Raycast(this.ray, out this.hit, 100, this.mask) && Input.touches[0].phase == TouchPhase.Ended)
             {
-                if (this.touchCollider.Equals(this.collider))
+                if (this.touchCollider)
                 {
-                    Application.LoadLevel((int)this.TurnToPage);
+                    if (this.touchCollider.Equals(this.collider))
+                    {
+                        Application.LoadLevel((int)this.TurnToPage);
+                    }
                 }
             }
         }

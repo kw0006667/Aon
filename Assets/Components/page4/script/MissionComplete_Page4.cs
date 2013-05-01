@@ -20,7 +20,7 @@ public class MissionComplete_Page4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!this.TargetObject != null)
+        if (this.TargetObject)
         {
             this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             if (Physics.Raycast(this.ray, out this.hit, 100, Mask))

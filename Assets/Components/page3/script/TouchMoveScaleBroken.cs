@@ -58,72 +58,76 @@ public class TouchMoveScaleBroken : MonoBehaviour
             }
             else if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Moved)
             {
-                float offest = Input.touches[0].deltaPosition.y;
-                Vector3 pos = this.currentTouchesCollider.gameObject.transform.position;
-
-                if (this.isTop)
+                if (this.currentTouchesCollider)
                 {
-                    this.currentTouchesCollider.gameObject.transform.position = new Vector3(pos.x, this.ray.origin.y, pos.z);
-                    if (this.currentTouchesCollider.gameObject.transform.position.y <= this.originalPosition.y)
+                    float offest = Input.touches[0].deltaPosition.y;
+                    Vector3 pos = this.currentTouchesCollider.gameObject.transform.position;
+
+                    if (this.isTop)
                     {
-                        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        this.currentTouchesCollider.gameObject.transform.position = new Vector3(pos.x, this.ray.origin.y, pos.z);
+                        if (this.currentTouchesCollider.gameObject.transform.position.y <= this.originalPosition.y)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        }
+                        else if (this.currentTouchesCollider.gameObject.transform.position.y <= this.AonLimitPosition.y)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
+                        }
+
+                        if (this.Brokens != null && this.Aon != null)
+                        {
+                            this.offestAonValue = this.originalPosition.y - pos.y;
+                            float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
+                            //float addValue = 0;
+                            //if (offest > 0)
+                            //    addValue = 0.01f;
+                            //else if (offest < 0)
+                            //    addValue = -0.01f;
+
+                            //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
+
+                            //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                            Color color = this.Brokens.renderer.material.GetColor("_Color");
+                            this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                            color = this.Aon.renderer.material.GetColor("_Color");
+                            this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                        }
                     }
-                    else if (this.currentTouchesCollider.gameObject.transform.position.y <= this.AonLimitPosition.y)
+                    else
                     {
-                        this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
-                    }
+                        this.currentTouchesCollider.gameObject.transform.position = new Vector3(pos.x, this.ray.origin.y, pos.z);
 
-                    if (this.Brokens != null && this.Aon != null)
-                    {
-                        this.offestAonValue = this.originalPosition.y - pos.y;
-                        float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
-                        //float addValue = 0;
-                        //if (offest > 0)
-                        //    addValue = 0.01f;
-                        //else if (offest < 0)
-                        //    addValue = -0.01f;
+                        if (this.currentTouchesCollider.gameObject.transform.position.y >= this.originalPosition.y)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        }
+                        else if (this.currentTouchesCollider.gameObject.transform.position.y <= this.AonLimitPosition.y)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
+                        }
 
-                        //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
+                        if (this.Brokens != null && this.Aon != null)
+                        {
+                            this.offestAonValue = this.originalPosition.y - pos.y;
+                            float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
+                            //float addValue = 0;
+                            //if (offest > 0)
+                            //    addValue = 0.01f;
+                            //else if (offest < 0)
+                            //    addValue = -0.01f;
 
-                        //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
-                        Color color = this.Brokens.renderer.material.GetColor("_Color");
-                        this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
-                        color = this.Aon.renderer.material.GetColor("_Color");
-                        this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                            //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
+                            //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
+                            Color color = this.Brokens.renderer.material.GetColor("_Color");
+                            this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                            color = this.Aon.renderer.material.GetColor("_Color");
+                            this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
+                        }
+
                     }
                 }
-                else
-                {
-                    this.currentTouchesCollider.gameObject.transform.position = new Vector3(pos.x, this.ray.origin.y, pos.z);
-
-                    if (this.currentTouchesCollider.gameObject.transform.position.y >= this.originalPosition.y)
-                    {
-                        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
-                    }
-                    else if (this.currentTouchesCollider.gameObject.transform.position.y <= this.AonLimitPosition.y)
-                    {
-                        this.currentTouchesCollider.gameObject.transform.position = this.AonLimitPosition;
-                    }
-
-                    if (this.Brokens != null && this.Aon != null)
-                    {
-                        this.offestAonValue = this.originalPosition.y - pos.y;
-                        float percent = this.offestAonValue / (this.originalPosition.y - this.AonLimitPosition.y);
-                        //float addValue = 0;
-                        //if (offest > 0)
-                        //    addValue = 0.01f;
-                        //else if (offest < 0)
-                        //    addValue = -0.01f;
-
-                        //this.Brokens.transform.localScale = new Vector3(this.Brokens.transform.localScale.x, this.Brokens.transform.localScale.y, this.Brokens.transform.localScale.z);
-                        //this.Brokens.transform.localScale = new Vector3(this.originalScaleBrokens.x + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.y + this.offestAonValue * this.scaleValue, this.originalScaleBrokens.z + this.offestAonValue * this.scaleValue * 0.56f);
-                        Color color = this.Brokens.renderer.material.GetColor("_Color");
-                        this.Brokens.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
-                        color = this.Aon.renderer.material.GetColor("_Color");
-                        this.Aon.renderer.material.SetColor("_Color", new Color(color.r, color.g, color.b, percent));
-                    }
-
-                }
+                
             }
             else if (Input.touches[0].phase == TouchPhase.Ended)
             {

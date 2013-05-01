@@ -29,8 +29,12 @@ public class MissionComplete_Page5 : MonoBehaviour
             //}
             if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Ended))
             {
-                if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
-                    Application.LoadLevel("page9");
+                if (this.TargetObject)
+                {
+                    if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
+                        Application.LoadLevel("page9");
+                }
+
             }
         }
         else

@@ -36,41 +36,29 @@ public class TouchMoved : MonoBehaviour
             }
             else if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Moved && this.currentTouchesCollider != null)
             {
-                float offest = Input.touches[0].deltaPosition.x;
-                this.currentTouchesCollider.gameObject.transform.position += new Vector3(Input.touches[0].deltaPosition.x * 0.05f, 0, 0);
-                if (this.isLeft)
+                if (this.currentTouchesCollider)
                 {
-                    if (this.currentTouchesCollider.gameObject.transform.position.x >= this.originalPosition.x)
+                    float offest = Input.touches[0].deltaPosition.x;
+                    this.currentTouchesCollider.gameObject.transform.position += new Vector3(Input.touches[0].deltaPosition.x * 0.05f, 0, 0);
+                    if (this.isLeft)
                     {
-                        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        if (this.currentTouchesCollider.gameObject.transform.position.x >= this.originalPosition.x)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        }
+                    }
+                    else
+                    {
+                        if (this.currentTouchesCollider.gameObject.transform.position.x <= this.originalPosition.x)
+                        {
+                            this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
+                        }
                     }
                 }
-                else
-                {
-                    if (this.currentTouchesCollider.gameObject.transform.position.x <= this.originalPosition.x)
-                    {
-                        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
-                    }
-                }
-
             }
             else if (Input.touches[0].phase == TouchPhase.Ended)
             {
-                //this.currentTouchesCollider.gameObject.transform.position = new Vector3(Input.touches[0].position.x, this.currentTouchesCollider.gameObject.transform.position.y, this.currentTouchesCollider.gameObject.transform.position.z);
-                //if (this.currentTouchesCollider.Equals(this.collider))
-                //{
-                //    if (Input.touches[0].deltaPosition.x > 0)
-                //    {
-                //        this.rigidbody.AddForce(this.transform.TransformDirection(Vector3.right) * 300);
-                //    }
-                //    if (Input.touches[0].deltaPosition.x < 0)
-                //    {
-                //        this.rigidbody.AddForce(this.transform.TransformDirection(Vector3.left) * 300);
-                //    }
-                //}
-                    
                 this.currentTouchesCollider = null;
-
             }
         }
         else

@@ -7,27 +7,48 @@ public class MissionCompleted : MonoBehaviour
     public Rect[] TargetArea;
     public LayerMask Mask;
 
+    private Collider touchCollider;
+
     private RaycastHit hit;
     private Ray ray;
 
     // Use this for initialization
     void Start()
     {
-
+        this.touchCollider = null;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask))
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
-            if (this.hit.collider.Equals(this.TargetObject.collider) && this.touchInArea(this.hit))
+            this.ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Began)
             {
-                Application.LoadLevel("page3");
+                this.touchCollider = null;
+                if (this.hit.collider.Equals(this.TargetObject))
+                {
+                    this.touchCollider = this.hit.collider;
+                }
+            }
+            if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Ended)
+            {
+                if (this.touchCollider)
+                {
+                    if (this.hit.collider.Equals(this.TargetObject.collider) && this.touchInArea(this.hit))
+                    {
+                        Application.LoadLevel("page3");
+                    }
+                }
             }
         }
+        else
+        {
+            Debug.Log("Current device is not mobile. (Windows 8 RT, Android or iOS)");
+        }
+
     }
 
     void OnGUI()
