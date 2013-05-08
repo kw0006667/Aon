@@ -5,7 +5,7 @@ public class AonTrigger : MonoBehaviour
 {
     public GameObject AonBlink;
     public GameObject AonFound;
-    public Vector3 TargetArea;
+    public Vector3 TargetArea = new Vector3(4.554856f, 3.295128f, 12);
     public LayerMask Mask;
 
     private RaycastHit hit;
@@ -32,7 +32,7 @@ public class AonTrigger : MonoBehaviour
             {
                 if (this.hit.collider.Equals(this.collider))
                 {
-                    this.AonBlink.SetActive(true);
+                    this.AonBlink.GetComponent<MeshRenderer>().enabled = true;
                     this.aonBlinkTextureAnimation = this.AonBlink.GetComponent<TextureAnimation>();
                     this.aonBlinkTextureAnimation.PlayAnimation(true, this);
                 }

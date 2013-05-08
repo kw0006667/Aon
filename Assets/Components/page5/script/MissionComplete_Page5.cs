@@ -4,6 +4,7 @@ using System.Collections;
 public class MissionComplete_Page5 : MonoBehaviour
 {
     public GameObject TargetObject;
+    public GameObject ReplaceObject;
     public LayerMask Maks;
 
     private RaycastHit hit;
@@ -22,19 +23,25 @@ public class MissionComplete_Page5 : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
-            this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            //this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
             //if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Began))
             //{
             //    this.col = this.hit.collider;
             //}
-            if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Ended))
-            {
-                if (this.TargetObject)
-                {
-                    if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
-                        Application.LoadLevel("page7");
-                }
+            //if (Physics.Raycast(this.ray, out this.hit, 100, this.Maks) && Input.touches[0].phase.Equals(TouchPhase.Ended))
+            //{
+            //    if (this.TargetObject)
+            //    {
+            //        if (this.hit.collider.Equals(this.TargetObject.collider) && this.TargetObject.GetComponent<MeshRenderer>().enabled == true)
+            //            Application.LoadLevel("page7");
+            //    }
 
+            //}
+
+            if (this.TargetObject.GetComponent<MeshRenderer>().enabled)
+            {
+                this.ReplaceObject.GetComponent<MeshRenderer>().enabled = true;
+                this.TargetObject.GetComponent<AonTrigger>().enabled = true;
             }
         }
         else

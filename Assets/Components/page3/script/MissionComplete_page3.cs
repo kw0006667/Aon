@@ -20,13 +20,13 @@ public class MissionComplete_page3 : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.MetroPlayerARM)
         {
-            this.ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
-            if (Physics.Raycast(this.ray, out this.hit, 100, this.Mask) && Input.touches[0].phase == TouchPhase.Ended)
+            if (this.TaretObject.renderer.material.GetColor("_Color").a >= 0.7f)
             {
-                if (this.hit.collider.Equals(this.TaretObject.collider) && this.TaretObject.renderer.material.GetColor("_Color").a >= 0.7f)
-                {
-                    Application.LoadLevel("page4");
-                }
+                this.TaretObject.GetComponent<AonTrigger>().enabled = true;
+            }
+            else
+            {
+                this.TaretObject.GetComponent<AonTrigger>().enabled = false;
             }
         }
         else
