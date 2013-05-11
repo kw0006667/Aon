@@ -19,7 +19,7 @@ public class MissionComplete_page7 : MonoBehaviour
         Random.seed = System.Guid.NewGuid().GetHashCode();
         foreach (var item in this.TargetObjects)
         {
-            item.GetComponent<MeshRenderer>().enabled = false;
+            item.GetComponent<MeshRenderer>().enabled = true;
         }
         this.currentTarget = Random.Range(0, 3);
         this.TargetObjects[this.currentTarget].GetComponent<MeshRenderer>().enabled = true;
