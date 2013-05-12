@@ -37,21 +37,8 @@ public class ToucheMoved_8 : MonoBehaviour
                 if (this.currentTouchesCollider)
                 {
                     float offest = Input.touches[0].deltaPosition.x;
-                    this.currentTouchesCollider.gameObject.transform.position += new Vector3(Input.touches[0].deltaPosition.x * 0.05f, 0, 0);
-                    //if (this.isLeft)
-                    //{
-                    //    if (this.currentTouchesCollider.gameObject.transform.position.x >= this.originalPosition.x)
-                    //    {
-                    //        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if (this.currentTouchesCollider.gameObject.transform.position.x <= this.originalPosition.x)
-                    //    {
-                    //        this.currentTouchesCollider.gameObject.transform.position = this.originalPosition;
-                    //    }
-                    //}
+                    float offestY = Input.touches[0].deltaPosition.y;
+                    this.currentTouchesCollider.gameObject.transform.position += new Vector3(Input.touches[0].deltaPosition.x * 0.02f, Input.touches[0].deltaPosition.y * 0.02f, 0);
                 }
             }
             else if (Input.touches[0].phase == TouchPhase.Ended)

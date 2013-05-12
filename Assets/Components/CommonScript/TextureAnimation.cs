@@ -82,6 +82,7 @@ public class TextureAnimation : MonoBehaviour
     public void PlayAnimation(bool _isPlay, Object _aon)
     {
         this.aonTrigger = _aon;
+        this.GetComponent<MeshRenderer>().enabled = true;
         this.IsPlay = _isPlay;
     }
 }
