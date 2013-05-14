@@ -14,12 +14,14 @@ public class AonTrigger : MonoBehaviour
     private TextureAnimation aonBlinkTextureAnimation;
     private TextureAnimation aonShineTextureAnimation;
     private bool isMoving;
+    private float offestValueY;
 
     // Use this for initialization
     void Start()
     {
         this.isMoving = false;
         this.aonShineTextureAnimation = this.AonFound.GetComponent<TextureAnimation>();
+        this.offestValueY = 0.0f;
     }
 
     // Update is called once per frame
@@ -49,7 +51,7 @@ public class AonTrigger : MonoBehaviour
     {
         if (this.isMoving)
         {
-            this.AonBlink.transform.position = Vector3.MoveTowards(this.AonBlink.transform.position, this.TargetArea, Time.deltaTime * 5);
+            this.AonBlink.transform.position = Vector3.MoveTowards(this.AonBlink.transform.position + new Vector3(0, Random.Range(-0.1f, 0.1f), 0) * Time.deltaTime * 10, this.TargetArea, Time.deltaTime * 5);
             if (this.AonBlink.transform.position.Equals(this.TargetArea))
             {
                 this.isMoving = false;
