@@ -5,7 +5,8 @@ public class p14_Carriages : MonoBehaviour {
     public float m_fdegree;
 
 public void SetDegree(float deg) {
-        m_fdegree = deg; 
+        m_fdegree = deg;
+        transform.Rotate(0, -m_fdegree, 0);
     }
  	// Use this for initialization
 	void Start () {
@@ -14,6 +15,6 @@ public void SetDegree(float deg) {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, -m_fdegree, 0);
+        
 	}
 }
